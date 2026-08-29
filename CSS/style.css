@@ -1,0 +1,391 @@
+/* =========================
+   CONFIGURAÇÕES GERAIS
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fa;
+    color: #1f2937;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    background-color: #ffffff;
+    padding: 20px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+header h1 {
+    font-size: 28px;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #4b5563;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: #111827;
+}
+
+
+/* =========================
+   CONTEÚDO PRINCIPAL
+========================= */
+
+main {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+
+/* =========================
+   BOAS-VINDAS
+========================= */
+
+.welcome {
+    margin-bottom: 30px;
+}
+
+.welcome h2 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.welcome p {
+    color: #6b7280;
+}
+
+
+/* =========================
+   FORMULÁRIO (transação e configurações)
+========================= */
+
+.transaction-form {
+    display: none;
+    background-color: #ffffff;
+    padding: 25px;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.transaction-form h2 {
+    margin-bottom: 20px;
+}
+
+.transaction-form form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.transaction-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.transaction-form input,
+.transaction-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.transaction-form input:focus,
+.transaction-form select:focus {
+    outline: none;
+    border-color: #111827;
+}
+
+
+/* =========================
+   BOTÕES DO FORMULÁRIO
+========================= */
+
+.form-buttons {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 10px;
+}
+
+.form-buttons button {
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.form-buttons button[type="submit"],
+#saveSettingsBtn {
+    background-color: #111827;
+    color: #ffffff;
+}
+
+.form-buttons button[type="submit"]:hover,
+#saveSettingsBtn:hover {
+    opacity: 0.9;
+}
+
+#cancelTransaction,
+#cancelSettingsBtn {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+#cancelTransaction:hover,
+#cancelSettingsBtn:hover {
+    background-color: #d1d5db;
+}
+
+
+/* =========================
+   CONFIGURAÇÕES / MEMBROS
+========================= */
+
+.settings-block {
+    margin-bottom: 20px;
+}
+
+.settings-hint {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 12px;
+}
+
+.member-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.member-row input {
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.member-row .member-name {
+    flex: 2;
+}
+
+.member-row .member-value {
+    flex: 1;
+}
+
+.member-row button {
+    border: none;
+    background-color: #fee2e2;
+    color: #b91c1c;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.secondary-button {
+    border: none;
+    background-color: #e5e7eb;
+    color: #374151;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.secondary-button:hover {
+    background-color: #d1d5db;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.card h3 {
+    font-size: 15px;
+    color: #6b7280;
+    margin-bottom: 12px;
+}
+
+.card p {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   COMPARAÇÃO RENDA x GASTOS
+========================= */
+
+.division-status {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 18px 25px;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.division-status.positive {
+    border-color: #86efac;
+    background-color: #f0fdf4;
+    color: #166534;
+}
+
+.division-status.negative {
+    border-color: #fca5a5;
+    background-color: #fef2f2;
+    color: #991b1b;
+}
+
+
+/* =========================
+   TRANSAÇÕES
+========================= */
+
+.transactions {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.section-header h2 {
+    font-size: 20px;
+}
+
+
+/* =========================
+   BOTÃO ADICIONAR
+========================= */
+
+#addTransaction {
+    border: none;
+    background-color: #111827;
+    color: #ffffff;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+#addTransaction:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================
+   LISTA DE TRANSAÇÕES
+========================= */
+
+#transactionList {
+    color: #6b7280;
+    padding: 20px 0;
+}
+
+.transaction-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.transaction-item strong {
+    color: #1f2937;
+}
+
+.transaction-item p {
+    margin-top: 5px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 700px) {
+
+    header {
+        padding: 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .summary {
+        grid-template-columns: 1fr;
+    }
+
+    .transaction-form form {
+        grid-template-columns: 1fr;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .transaction-item {
+        gap: 15px;
+    }
+
+    .member-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

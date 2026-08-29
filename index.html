@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeGast</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>LifeGast</h1>
+        <nav>
+            <a href="#">Dashboard</a>
+            <a href="#">Transações</a>
+            <a href="#" id="navConfig">Configurações</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="welcome">
+            <h2 id="greeting">Olá! 👋</h2>
+            <p>Controle seus gastos de forma simples.</p>
+        </section>
+
+        <!-- Formulário de nova transação -->
+        <section class="transaction-form" id="transactionForm">
+            <h2>Nova transação</h2>
+            <form id="form">
+                <div>
+                    <label for="description">Descrição</label>
+                    <input type="text" id="description" placeholder="Ex: Mercado" required>
+                </div>
+                <div>
+                    <label for="amount">Valor</label>
+                    <input type="number" id="amount" placeholder="0,00" step="0.01" required>
+                </div>
+                <div>
+                    <label for="type">Tipo</label>
+                    <select id="type" required>
+                        <option value="">Selecione</option>
+                        <option value="income">Receita</option>
+                        <option value="expense">Despesa</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="date">Data</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit">Salvar transação</button>
+                    <button type="button" id="cancelTransaction">Cancelar</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Configurações: nome do usuário e membros que contribuem com a renda -->
+        <section class="transaction-form" id="settingsSection">
+            <h2>Configurações</h2>
+
+            <div class="settings-block">
+                <label for="userName">Seu nome</label>
+                <input type="text" id="userName" placeholder="Ex: Maria">
+            </div>
+
+            <div class="settings-block">
+                <label>Quem contribui com a renda</label>
+                <p class="settings-hint">Se você usa sozinho(a), cadastre só o seu nome com o valor que você contribui.</p>
+
+                <div id="membersList"></div>
+
+                <button type="button" id="addMemberBtn" class="secondary-button">+ Adicionar membro</button>
+            </div>
+
+            <div class="form-buttons">
+                <button type="button" id="saveSettingsBtn">Salvar configurações</button>
+                <button type="button" id="cancelSettingsBtn">Cancelar</button>
+            </div>
+        </section>
+
+        <section class="summary">
+            <div class="card">
+                <h3>Saldo atual</h3>
+                <p id="balance">R$ 0,00</p>
+            </div>
+            <div class="card">
+                <h3>Receitas</h3>
+                <p id="totalIncome">R$ 0,00</p>
+            </div>
+            <div class="card">
+                <h3>Despesas</h3>
+                <p id="totalExpense">R$ 0,00</p>
+            </div>
+            <div class="card">
+                <h3>Renda bruta (soma dos membros)</h3>
+                <p id="grossIncome">R$ 0,00</p>
+            </div>
+        </section>
+
+        <!-- Comparação: quanto entrou (membros) x quanto foi gasto -->
+        <section id="divisionStatus" class="division-status">
+            <p id="divisionText">Cadastre os membros em Configurações pra ver se o dinheiro fechou.</p>
+        </section>
+
+        <section class="transactions">
+            <div class="section-header">
+                <h2>Últimas transações</h2>
+                <button id="addTransaction">+ Adicionar transação</button>
+            </div>
+            <div id="transactionList">
+                <p>Nenhuma transação cadastrada.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="JS/script.js"></script>
+
+</body>
+
+</html>
