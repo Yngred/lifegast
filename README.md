@@ -1,4 +1,4 @@
-# LifeGast 💰
+# LifeGast 
 
 Site simples de controle financeiro pessoal, feito em HTML, CSS e JavaScript puro (sem frameworks).
 
