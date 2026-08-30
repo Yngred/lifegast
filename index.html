@@ -117,6 +117,33 @@
 
     </main>
 
+    <!-- Botão flutuante que abre o chat -->
+    <button id="chatToggle" class="chat-toggle">💬 Conversar com a IA</button>
+
+    <!-- Janela do chat -->
+    <div id="chatWindow" class="chat-window">
+        <div class="chat-header">
+            <span>Assistente LifeGast</span>
+            <button id="chatClose" class="chat-close">✕</button>
+        </div>
+        <div id="chatMessages" class="chat-messages">
+            <div class="chat-bubble bot">Oi! Escolhe uma pergunta abaixo 👇</div>
+        </div>
+        <div class="chat-quick-replies">
+            <button class="chat-question" data-key="maiorCategoria">Maior categoria de gasto</button>
+            <button class="chat-question" data-key="gastoMes">Gastei quanto esse mês?</button>
+            <button class="chat-question" data-key="receitaMes">Recebi quanto esse mês?</button>
+            <button class="chat-question" data-key="fechamento">O dinheiro fechou?</button>
+            <button class="chat-question" data-key="contagem">Quantas transações tenho?</button>
+            <button class="chat-question" data-key="relatorioAnual">Relatório do ano</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.0';
+        window.transformersPipeline = pipeline;
+    </script>
+    <script src="JS/ia.js"></script>
     <script src="JS/script.js"></script>
 
 </body>

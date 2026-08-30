@@ -17,7 +17,6 @@ const totalExpenseEl = document.getElementById("totalExpense");
 
 let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
-// Guarda o total de despesas calculado, pra usar na comparação com a renda
 let totalDespesasAtual = 0;
 
 addButton.addEventListener("click", function () {
@@ -28,7 +27,7 @@ cancelButton.addEventListener("click", function () {
     form.style.display = "none";
 });
 
-formEl.addEventListener("submit", function (event) {
+formEl.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const newTransaction = {
@@ -38,6 +37,10 @@ formEl.addEventListener("submit", function (event) {
         type: typeInput.value,
         date: dateInput.value
     };
+
+    if (newTransaction.type === "expense") {
+        newTransaction.categoria = await categorizarTransacao(newTransaction.description);
+    }
 
     transactions.push(newTransaction);
 
@@ -75,9 +78,10 @@ function renderizarLista() {
 
         const sinal = t.type === "income" ? "+" : "-";
         const cor = t.type === "income" ? "green" : "red";
+        const categoriaTag = t.categoria ? ` [${t.categoria}]` : "";
 
         item.innerHTML = `
-            <span>${t.description} (${t.date})</span>
+            <span>${t.description}${categoriaTag} (${t.date})</span>
             <span style="color: ${cor}">${sinal} R$ ${t.amount.toFixed(2)}</span>
             <button onclick="apagarTransacao(${t.id})">🗑️</button>
         `;
@@ -129,7 +133,6 @@ const grossIncomeEl = document.getElementById("grossIncome");
 const divisionStatusEl = document.getElementById("divisionStatus");
 const divisionTextEl = document.getElementById("divisionText");
 
-// settings guarda o nome do usuário e a lista de membros (cada um com o valor que contribui)
 let settings = JSON.parse(localStorage.getItem("settings")) || { name: "", members: [] };
 
 navConfig.addEventListener("click", function (event) {
@@ -193,7 +196,6 @@ saveSettingsBtn.addEventListener("click", function () {
     settingsSection.style.display = "none";
 });
 
-// Atualiza a saudação e o card de Renda bruta
 function renderizarSaudacaoERenda() {
     greetingEl.textContent = settings.name ? `Olá, ${settings.name}! 👋` : "Olá! 👋";
 
@@ -207,7 +209,6 @@ function calcularRendaBruta() {
     }, 0);
 }
 
-// Compara quanto os membros contribuíram com quanto foi gasto (despesas das transações)
 function renderizarDivisao() {
     if (settings.members.length === 0) {
         divisionStatusEl.className = "division-status";
@@ -229,6 +230,41 @@ function renderizarDivisao() {
             `Vocês contribuíram R$ ${rendaBruta.toFixed(2)} e gastaram R$ ${totalDespesasAtual.toFixed(2)}. Faltou R$ ${faltou.toFixed(2)} — foi preciso tirar de outros gastos pessoais.`;
     }
 }
+
+
+// ===== CHAT GUIADO =====
+
+const chatToggle = document.getElementById('chatToggle');
+const chatWindow = document.getElementById('chatWindow');
+const chatClose = document.getElementById('chatClose');
+const chatMessages = document.getElementById('chatMessages');
+
+chatToggle.addEventListener('click', function () {
+    chatWindow.classList.add('open');
+});
+
+chatClose.addEventListener('click', function () {
+    chatWindow.classList.remove('open');
+});
+
+function adicionarMensagem(texto, autor) {
+    const bolha = document.createElement('div');
+    bolha.className = 'chat-bubble ' + autor;
+    bolha.innerText = texto;
+    chatMessages.appendChild(bolha);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+document.querySelectorAll('.chat-question').forEach(function (botao) {
+    botao.addEventListener('click', function () {
+        const chave = botao.getAttribute('data-key');
+
+        adicionarMensagem(botao.innerText, 'user');
+
+        const resposta = responderPergunta(chave, transactions, calcularRendaBruta());
+        adicionarMensagem(resposta, 'bot');
+    });
+});
 
 
 // ===== INICIALIZAÇÃO =====

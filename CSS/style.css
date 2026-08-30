@@ -1,391 +1,376 @@
-/* =========================
-   CONFIGURAÇÕES GERAIS
-========================= */
-
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f7fa;
-    color: #1f2937;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f5f6fa;
+    color: #222;
+    padding-bottom: 40px;
 }
 
-
-/* =========================
-   HEADER
-========================= */
-
 header {
-    background-color: #ffffff;
-    padding: 20px 60px;
+    background: #2f80ed;
+    color: white;
+    padding: 20px 30px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #e5e7eb;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 header h1 {
-    font-size: 28px;
-}
-
-nav {
-    display: flex;
-    gap: 25px;
+    font-size: 22px;
 }
 
 nav a {
+    color: white;
     text-decoration: none;
-    color: #4b5563;
-    font-weight: 500;
+    margin-left: 20px;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 nav a:hover {
-    color: #111827;
+    text-decoration: underline;
 }
-
-
-/* =========================
-   CONTEÚDO PRINCIPAL
-========================= */
 
 main {
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 0 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px 20px;
 }
 
-
-/* =========================
-   BOAS-VINDAS
-========================= */
-
 .welcome {
-    margin-bottom: 30px;
+    margin-bottom: 24px;
 }
 
 .welcome h2 {
-    font-size: 30px;
-    margin-bottom: 8px;
+    font-size: 22px;
+    margin-bottom: 4px;
 }
 
 .welcome p {
-    color: #6b7280;
+    color: #666;
+    font-size: 14px;
 }
 
-
-/* =========================
-   FORMULÁRIO (transação e configurações)
-========================= */
+/* ===== Formulários (nova transação / configurações) ===== */
 
 .transaction-form {
-    display: none;
-    background-color: #ffffff;
-    padding: 25px;
-    margin-bottom: 30px;
+    background: white;
     border-radius: 12px;
-    border: 1px solid #e5e7eb;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    display: none;
 }
 
 .transaction-form h2 {
-    margin-bottom: 20px;
+    font-size: 18px;
+    margin-bottom: 16px;
 }
 
-.transaction-form form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+.transaction-form form > div,
+.settings-block {
+    margin-bottom: 14px;
 }
 
 .transaction-form label {
     display: block;
-    margin-bottom: 6px;
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #444;
 }
 
 .transaction-form input,
 .transaction-form select {
     width: 100%;
     padding: 10px;
-    border: 1px solid #d1d5db;
+    border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 14px;
 }
 
-.transaction-form input:focus,
-.transaction-form select:focus {
-    outline: none;
-    border-color: #111827;
-}
-
-
-/* =========================
-   BOTÕES DO FORMULÁRIO
-========================= */
-
-.form-buttons {
-    grid-column: 1 / -1;
-    display: flex;
-    gap: 10px;
-}
-
-.form-buttons button {
-    border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 500;
-}
-
-.form-buttons button[type="submit"],
-#saveSettingsBtn {
-    background-color: #111827;
-    color: #ffffff;
-}
-
-.form-buttons button[type="submit"]:hover,
-#saveSettingsBtn:hover {
-    opacity: 0.9;
-}
-
-#cancelTransaction,
-#cancelSettingsBtn {
-    background-color: #e5e7eb;
-    color: #374151;
-}
-
-#cancelTransaction:hover,
-#cancelSettingsBtn:hover {
-    background-color: #d1d5db;
-}
-
-
-/* =========================
-   CONFIGURAÇÕES / MEMBROS
-========================= */
-
-.settings-block {
-    margin-bottom: 20px;
-}
-
 .settings-hint {
-    font-size: 13px;
-    color: #6b7280;
-    margin-bottom: 12px;
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 10px;
 }
 
 .member-row {
     display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
 }
 
 .member-row input {
-    padding: 10px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font-size: 14px;
-}
-
-.member-row .member-name {
-    flex: 2;
-}
-
-.member-row .member-value {
     flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
 }
 
 .member-row button {
+    background: none;
     border: none;
-    background-color: #fee2e2;
-    color: #b91c1c;
-    padding: 10px 12px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+button {
+    font-family: inherit;
+}
+
+.transaction-form button[type="submit"],
+#saveSettingsBtn {
+    background: #2f80ed;
+    color: white;
+    border: none;
+    padding: 10px 18px;
     border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.transaction-form button[type="button"]:not(.secondary-button),
+#cancelSettingsBtn,
+#cancelTransaction {
+    background: #eee;
+    color: #333;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 14px;
     cursor: pointer;
 }
 
 .secondary-button {
-    border: none;
-    background-color: #e5e7eb;
-    color: #374151;
-    padding: 10px 16px;
+    background: #eef4ff;
+    color: #2f80ed;
+    border: 1px solid #cfe0ff;
+    padding: 8px 14px;
     border-radius: 8px;
+    font-size: 13px;
     cursor: pointer;
-    font-weight: 500;
 }
 
-.secondary-button:hover {
-    background-color: #d1d5db;
-}
-
-
-/* =========================
-   CARDS
-========================= */
+/* ===== Cards de resumo ===== */
 
 .summary {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
     margin-bottom: 20px;
 }
 
 .card {
-    background-color: #ffffff;
-    padding: 25px;
+    background: white;
     border-radius: 12px;
-    border: 1px solid #e5e7eb;
+    padding: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .card h3 {
-    font-size: 15px;
-    color: #6b7280;
-    margin-bottom: 12px;
+    font-size: 13px;
+    color: #888;
+    font-weight: 600;
+    margin-bottom: 6px;
 }
 
 .card p {
-    font-size: 26px;
-    font-weight: bold;
+    font-size: 20px;
+    font-weight: 700;
 }
 
-
-/* =========================
-   COMPARAÇÃO RENDA x GASTOS
-========================= */
+/* ===== Divisão (renda x gasto) ===== */
 
 .division-status {
-    background-color: #ffffff;
-    border: 1px solid #e5e7eb;
+    background: white;
     border-radius: 12px;
-    padding: 18px 25px;
-    margin-bottom: 30px;
-    font-weight: 500;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    border-left: 4px solid #ccc;
 }
 
 .division-status.positive {
-    border-color: #86efac;
-    background-color: #f0fdf4;
-    color: #166534;
+    border-left-color: #27ae60;
+    background: #f2fbf5;
 }
 
 .division-status.negative {
-    border-color: #fca5a5;
-    background-color: #fef2f2;
-    color: #991b1b;
+    border-left-color: #eb5757;
+    background: #fdf2f2;
 }
 
-
-/* =========================
-   TRANSAÇÕES
-========================= */
+/* ===== Lista de transações ===== */
 
 .transactions {
-    background-color: #ffffff;
-    padding: 25px;
+    background: white;
     border-radius: 12px;
-    border: 1px solid #e5e7eb;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .section-header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    margin-bottom: 25px;
+    align-items: center;
+    margin-bottom: 16px;
 }
 
 .section-header h2 {
-    font-size: 20px;
+    font-size: 18px;
 }
 
-
-/* =========================
-   BOTÃO ADICIONAR
-========================= */
-
-#addTransaction {
+.section-header button {
+    background: #2f80ed;
+    color: white;
     border: none;
-    background-color: #111827;
-    color: #ffffff;
-    padding: 10px 16px;
+    padding: 8px 14px;
     border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
     cursor: pointer;
-    font-weight: 500;
-}
-
-#addTransaction:hover {
-    opacity: 0.9;
-}
-
-
-/* =========================
-   LISTA DE TRANSAÇÕES
-========================= */
-
-#transactionList {
-    color: #6b7280;
-    padding: 20px 0;
 }
 
 .transaction-item {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 15px 0;
-    border-bottom: 1px solid #e5e7eb;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
 }
 
 .transaction-item:last-child {
     border-bottom: none;
 }
 
-.transaction-item strong {
-    color: #1f2937;
+.transaction-item button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
 }
 
-.transaction-item p {
-    margin-top: 5px;
+/* ===== Chat da IA ===== */
+
+.chat-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #2f80ed;
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 100;
+}
+
+.chat-window {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 320px;
+    max-width: 90vw;
+    height: 440px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 100;
+}
+
+.chat-window.open {
+    display: flex;
+}
+
+.chat-header {
+    background: #2f80ed;
+    color: white;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+}
+
+.chat-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.chat-bubble {
+    max-width: 80%;
+    padding: 10px 12px;
+    border-radius: 14px;
     font-size: 13px;
-    color: #6b7280;
+    white-space: pre-line;
+    line-height: 1.4;
 }
 
+.chat-bubble.bot {
+    background: #f1f1f1;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
 
-/* =========================
-   RESPONSIVIDADE
-========================= */
+.chat-bubble.user {
+    background: #2f80ed;
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
 
-@media (max-width: 700px) {
+.chat-quick-replies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px;
+    border-top: 1px solid #eee;
+}
 
-    header {
-        padding: 20px;
-        flex-direction: column;
-        gap: 15px;
-    }
+.chat-quick-replies button {
+    background: #eef4ff;
+    color: #2f80ed;
+    border: 1px solid #cfe0ff;
+    border-radius: 14px;
+    padding: 6px 10px;
+    font-size: 12px;
+    cursor: pointer;
+}
 
-    .summary {
-        grid-template-columns: 1fr;
-    }
-
-    .transaction-form form {
-        grid-template-columns: 1fr;
-    }
-
-    .section-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-
-    .transaction-item {
-        gap: 15px;
-    }
-
-    .member-row {
-        flex-direction: column;
-        align-items: stretch;
-    }
+.chat-quick-replies button:hover {
+    background: #2f80ed;
+    color: white;
 }
