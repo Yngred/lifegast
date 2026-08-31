@@ -55,6 +55,32 @@ main {
 .welcome p {
     color: #666;
     font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.simulate-button {
+    margin-top: 10px;
+    background: #f2994a;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.tutorial-button {
+    margin-top: 10px;
+    margin-left: 8px;
+    background: #eef4ff;
+    color: #2f80ed;
+    border: 1px solid #cfe0ff;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 /* ===== Formulários (nova transação / configurações) ===== */
@@ -193,6 +219,28 @@ button {
     font-weight: 700;
 }
 
+/* ===== Gráficos ===== */
+
+.charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.chart-card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.chart-card h3 {
+    font-size: 14px;
+    margin-bottom: 12px;
+    color: #444;
+}
+
 /* ===== Divisão (renda x gasto) ===== */
 
 .division-status {
@@ -265,7 +313,7 @@ button {
     font-size: 15px;
 }
 
-/* ===== Chat da IA ===== */
+/* ===== Chat do Assistente LifeGast ===== */
 
 .chat-toggle {
     position: fixed;

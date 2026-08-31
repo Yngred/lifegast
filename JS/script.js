@@ -115,6 +115,60 @@ function renderizarTudo() {
     renderizarLista();
     renderizarResumo();
     renderizarDivisao();
+    renderizarGraficos();
+}
+
+
+// ===== GRÁFICOS =====
+
+let graficoCategorias = null;
+let graficoMensal = null;
+
+function renderizarGraficos() {
+    const despesas = transactions.filter(t => t.type === "expense");
+
+    const porCategoria = {};
+    despesas.forEach(t => {
+        const cat = t.categoria || "Sem categoria";
+        porCategoria[cat] = (porCategoria[cat] || 0) + t.amount;
+    });
+
+    const ctxCategorias = document.getElementById("chartCategorias");
+    if (graficoCategorias) graficoCategorias.destroy();
+    graficoCategorias = new Chart(ctxCategorias, {
+        type: "pie",
+        data: {
+            labels: Object.keys(porCategoria),
+            datasets: [{
+                data: Object.values(porCategoria),
+                backgroundColor: ["#2f80ed", "#27ae60", "#eb5757", "#f2994a", "#9b51e0", "#56ccf2", "#bdbdbd", "#f2c94c"]
+            }]
+        },
+        options: { responsive: true }
+    });
+
+    const porMes = {};
+    despesas.forEach(t => {
+        const mes = t.date.slice(0, 7);
+        porMes[mes] = (porMes[mes] || 0) + t.amount;
+    });
+
+    const mesesOrdenados = Object.keys(porMes).sort();
+
+    const ctxMensal = document.getElementById("chartMensal");
+    if (graficoMensal) graficoMensal.destroy();
+    graficoMensal = new Chart(ctxMensal, {
+        type: "bar",
+        data: {
+            labels: mesesOrdenados,
+            datasets: [{
+                label: "Gastos (R$)",
+                data: mesesOrdenados.map(m => porMes[m]),
+                backgroundColor: "#2f80ed"
+            }]
+        },
+        options: { responsive: true, scales: { y: { beginAtZero: true } } }
+    });
 }
 
 
@@ -230,6 +284,55 @@ function renderizarDivisao() {
             `Vocês contribuíram R$ ${rendaBruta.toFixed(2)} e gastaram R$ ${totalDespesasAtual.toFixed(2)}. Faltou R$ ${faltou.toFixed(2)} — foi preciso tirar de outros gastos pessoais.`;
     }
 }
+
+
+// ===== SIMULAÇÃO (dados de exemplo pra recrutador testar) =====
+
+const simulateBtn = document.getElementById("simulateBtn");
+
+simulateBtn.addEventListener("click", function () {
+    const hoje = new Date();
+    const anoAtual = hoje.getFullYear();
+
+    transactions = [
+        { id: 1, description: "Salário", amount: 3500, type: "income", date: `${anoAtual}-01-05` },
+        { id: 2, description: "Mercado", amount: 450, type: "expense", date: `${anoAtual}-01-10`, categoria: "Alimentação" },
+        { id: 3, description: "Uber", amount: 120, type: "expense", date: `${anoAtual}-01-15`, categoria: "Transporte" },
+        { id: 4, description: "Aluguel", amount: 1200, type: "expense", date: `${anoAtual}-02-01`, categoria: "Moradia" },
+        { id: 5, description: "Cinema", amount: 80, type: "expense", date: `${anoAtual}-02-08`, categoria: "Lazer" },
+        { id: 6, description: "Mercado", amount: 380, type: "expense", date: `${anoAtual}-02-12`, categoria: "Alimentação" },
+        { id: 7, description: "Freelance", amount: 800, type: "income", date: `${anoAtual}-03-02` },
+        { id: 8, description: "Academia", amount: 100, type: "expense", date: `${anoAtual}-03-05`, categoria: "Saúde" },
+        { id: 9, description: "Mercado", amount: 410, type: "expense", date: `${anoAtual}-03-10`, categoria: "Alimentação" },
+        { id: 10, description: "Curso online", amount: 150, type: "expense", date: `${anoAtual}-03-18`, categoria: "Educação" }
+    ];
+
+    settings = {
+        name: "Visitante",
+        members: [{ id: 1, name: "Visitante", value: 4300 }]
+    };
+
+    salvarTransacoes();
+    localStorage.setItem("settings", JSON.stringify(settings));
+
+    renderizarTudo();
+    renderizarSaudacaoERenda();
+});
+
+
+// ===== TUTORIAL (tour guiado) =====
+
+const tutorialBtn = document.getElementById("tutorialBtn");
+
+tutorialBtn.addEventListener("click", function () {
+    introJs().setOptions({
+        nextLabel: "Próximo →",
+        prevLabel: "← Voltar",
+        doneLabel: "Entendi!",
+        exitOnOverlayClick: true,
+        showBullets: false
+    }).start();
+});
 
 
 // ===== CHAT GUIADO =====

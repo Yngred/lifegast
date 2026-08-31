@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LifeGast</title>
     <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/introjs.min.css">
 </head>
 
 <body>
@@ -24,6 +25,8 @@
         <section class="welcome">
             <h2 id="greeting">Olá! 👋</h2>
             <p>Controle seus gastos de forma simples.</p>
+            <button id="simulateBtn" class="simulate-button">🎮 Ver simulação com dados de exemplo</button>
+            <button id="tutorialBtn" class="tutorial-button">❓ Como usar</button>
         </section>
 
         <!-- Formulário de nova transação -->
@@ -81,7 +84,7 @@
             </div>
         </section>
 
-        <section class="summary">
+        <section class="summary" id="summarySection" data-intro="Aqui você vê seu saldo, receitas, despesas e quanto foi contribuído no total." data-step="2">
             <div class="card">
                 <h3>Saldo atual</h3>
                 <p id="balance">R$ 0,00</p>
@@ -100,12 +103,24 @@
             </div>
         </section>
 
+        <!-- Gráficos -->
+        <section class="charts" id="chartsSection" data-intro="Os gráficos mostram seus gastos por categoria e por mês, atualizados automaticamente." data-step="3">
+            <div class="chart-card">
+                <h3>Gastos por categoria</h3>
+                <canvas id="chartCategorias"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Gastos por mês</h3>
+                <canvas id="chartMensal"></canvas>
+            </div>
+        </section>
+
         <!-- Comparação: quanto entrou (membros) x quanto foi gasto -->
         <section id="divisionStatus" class="division-status">
             <p id="divisionText">Cadastre os membros em Configurações pra ver se o dinheiro fechou.</p>
         </section>
 
-        <section class="transactions">
+        <section class="transactions" id="transactionsSection" data-intro="Aqui aparecem suas últimas transações. Clique em '+ Adicionar transação' pra cadastrar uma nova." data-step="1">
             <div class="section-header">
                 <h2>Últimas transações</h2>
                 <button id="addTransaction">+ Adicionar transação</button>
@@ -118,7 +133,7 @@
     </main>
 
     <!-- Botão flutuante que abre o chat -->
-    <button id="chatToggle" class="chat-toggle">💬 Conversar com a IA</button>
+    <button id="chatToggle" class="chat-toggle" data-intro="Esse é o Assistente LifeGast: clique aqui pra tirar dúvidas rápidas sobre seus gastos." data-step="4">💬 Assistente LifeGast</button>
 
     <!-- Janela do chat -->
     <div id="chatWindow" class="chat-window">
@@ -139,6 +154,8 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/intro.min.js"></script>
     <script type="module">
         import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.0';
         window.transformersPipeline = pipeline;
