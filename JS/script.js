@@ -1,5 +1,9 @@
 // ===== TRANSAÇÕES =====
 
+function formatarMoeda(valor) {
+    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+}
+
 const addButton = document.getElementById("addTransaction");
 const cancelButton = document.getElementById("cancelTransaction");
 const form = document.getElementById("transactionForm");
@@ -82,7 +86,7 @@ function renderizarLista() {
 
         item.innerHTML = `
             <span>${t.description}${categoriaTag} (${t.date})</span>
-            <span style="color: ${cor}">${sinal} R$ ${t.amount.toFixed(2)}</span>
+            <span style="color: ${cor}">${sinal} ${formatarMoeda(t.amount)}</span>
             <button onclick="apagarTransacao(${t.id})">🗑️</button>
         `;
 
@@ -104,9 +108,9 @@ function renderizarResumo() {
 
     const saldo = receitas - despesas;
 
-    balanceEl.textContent = "R$ " + saldo.toFixed(2);
-    totalIncomeEl.textContent = "R$ " + receitas.toFixed(2);
-    totalExpenseEl.textContent = "R$ " + despesas.toFixed(2);
+    balanceEl.textContent = formatarMoeda(saldo);
+    totalIncomeEl.textContent = formatarMoeda(receitas);
+    totalExpenseEl.textContent = formatarMoeda(despesas);
 
     totalDespesasAtual = despesas;
 }
@@ -141,10 +145,10 @@ function renderizarGraficos() {
             labels: Object.keys(porCategoria),
             datasets: [{
                 data: Object.values(porCategoria),
-                backgroundColor: ["#2f80ed", "#27ae60", "#eb5757", "#f2994a", "#9b51e0", "#56ccf2", "#bdbdbd", "#f2c94c"]
+                backgroundColor: ["#1F5E4C", "#D9A441", "#C1666B", "#6B9080", "#A4C3B2", "#84A98C", "#CCE3DE", "#52796F"]
             }]
         },
-        options: { responsive: true }
+        options: { responsive: true, maintainAspectRatio: false }
     });
 
     const porMes = {};
@@ -164,10 +168,10 @@ function renderizarGraficos() {
             datasets: [{
                 label: "Gastos (R$)",
                 data: mesesOrdenados.map(m => porMes[m]),
-                backgroundColor: "#2f80ed"
+                backgroundColor: "#1F5E4C"
             }]
         },
-        options: { responsive: true, scales: { y: { beginAtZero: true } } }
+        options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
     });
 }
 
@@ -254,7 +258,7 @@ function renderizarSaudacaoERenda() {
     greetingEl.textContent = settings.name ? `Olá, ${settings.name}! 👋` : "Olá! 👋";
 
     const rendaBruta = calcularRendaBruta();
-    grossIncomeEl.textContent = "R$ " + rendaBruta.toFixed(2);
+    grossIncomeEl.textContent = formatarMoeda(rendaBruta);
 }
 
 function calcularRendaBruta() {
@@ -276,12 +280,12 @@ function renderizarDivisao() {
     if (diferenca >= 0) {
         divisionStatusEl.className = "division-status positive";
         divisionTextEl.textContent =
-            `Vocês contribuíram R$ ${rendaBruta.toFixed(2)} e gastaram R$ ${totalDespesasAtual.toFixed(2)}. Sobrou R$ ${diferenca.toFixed(2)}.`;
+            `Vocês contribuíram ${formatarMoeda(rendaBruta)} e gastaram ${formatarMoeda(totalDespesasAtual)}. Sobrou ${formatarMoeda(diferenca)}.`;
     } else {
         const faltou = Math.abs(diferenca);
         divisionStatusEl.className = "division-status negative";
         divisionTextEl.textContent =
-            `Vocês contribuíram R$ ${rendaBruta.toFixed(2)} e gastaram R$ ${totalDespesasAtual.toFixed(2)}. Faltou R$ ${faltou.toFixed(2)} — foi preciso tirar de outros gastos pessoais.`;
+            `Vocês contribuíram ${formatarMoeda(rendaBruta)} e gastaram ${formatarMoeda(totalDespesasAtual)}. Faltou ${formatarMoeda(faltou)} — foi preciso tirar de outros gastos pessoais.`;
     }
 }
 

@@ -5,132 +5,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LifeGast</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/introjs.min.css">
 </head>
 
 <body>
 
-    <header>
-        <h1>LifeGast</h1>
-        <nav>
-            <a href="#">Dashboard</a>
-            <a href="#">Transações</a>
-            <a href="#" id="navConfig">Configurações</a>
-        </nav>
-    </header>
+    <div class="app-shell">
 
-    <main>
+        <aside class="sidebar">
+            <div class="sidebar-logo">LifeGast</div>
+            <nav class="sidebar-nav">
+                <a href="#" class="active">Dashboard</a>
+                <a href="#">Transações</a>
+                <a href="#" id="navConfig">Configurações</a>
+            </nav>
+        </aside>
 
-        <section class="welcome">
-            <h2 id="greeting">Olá! 👋</h2>
-            <p>Controle seus gastos de forma simples.</p>
-            <button id="simulateBtn" class="simulate-button">🎮 Ver simulação com dados de exemplo</button>
-            <button id="tutorialBtn" class="tutorial-button">❓ Como usar</button>
-        </section>
+        <main class="content">
 
-        <!-- Formulário de nova transação -->
-        <section class="transaction-form" id="transactionForm">
-            <h2>Nova transação</h2>
-            <form id="form">
-                <div>
-                    <label for="description">Descrição</label>
-                    <input type="text" id="description" placeholder="Ex: Mercado" required>
+            <section class="welcome">
+                <h2 id="greeting">Olá! 👋</h2>
+                <p>Controle seus gastos de forma simples.</p>
+                <div class="welcome-actions">
+                    <button id="simulateBtn" class="simulate-button">🎮 Ver simulação com dados de exemplo</button>
+                    <button id="tutorialBtn" class="tutorial-button">❓ Como usar</button>
                 </div>
-                <div>
-                    <label for="amount">Valor</label>
-                    <input type="number" id="amount" placeholder="0,00" step="0.01" required>
+            </section>
+
+            <!-- Formulário de nova transação -->
+            <section class="transaction-form" id="transactionForm">
+                <h2>Nova transação</h2>
+                <form id="form">
+                    <div>
+                        <label for="description">Descrição</label>
+                        <input type="text" id="description" placeholder="Ex: Mercado" required>
+                    </div>
+                    <div>
+                        <label for="amount">Valor</label>
+                        <input type="number" id="amount" placeholder="0,00" step="0.01" required>
+                    </div>
+                    <div>
+                        <label for="type">Tipo</label>
+                        <select id="type" required>
+                            <option value="">Selecione</option>
+                            <option value="income">Receita</option>
+                            <option value="expense">Despesa</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="date">Data</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="submit">Salvar transação</button>
+                        <button type="button" id="cancelTransaction">Cancelar</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Configurações: nome do usuário e membros que contribuem com a renda -->
+            <section class="transaction-form" id="settingsSection">
+                <h2>Configurações</h2>
+
+                <div class="settings-block">
+                    <label for="userName">Seu nome</label>
+                    <input type="text" id="userName" placeholder="Ex: Maria">
                 </div>
-                <div>
-                    <label for="type">Tipo</label>
-                    <select id="type" required>
-                        <option value="">Selecione</option>
-                        <option value="income">Receita</option>
-                        <option value="expense">Despesa</option>
-                    </select>
+
+                <div class="settings-block">
+                    <label>Quem contribui com a renda</label>
+                    <p class="settings-hint">Se você usa sozinho(a), cadastre só o seu nome com o valor que você contribui.</p>
+
+                    <div id="membersList"></div>
+
+                    <button type="button" id="addMemberBtn" class="secondary-button">+ Adicionar membro</button>
                 </div>
-                <div>
-                    <label for="date">Data</label>
-                    <input type="date" id="date" required>
-                </div>
+
                 <div class="form-buttons">
-                    <button type="submit">Salvar transação</button>
-                    <button type="button" id="cancelTransaction">Cancelar</button>
+                    <button type="button" id="saveSettingsBtn">Salvar configurações</button>
+                    <button type="button" id="cancelSettingsBtn">Cancelar</button>
                 </div>
-            </form>
-        </section>
+            </section>
 
-        <!-- Configurações: nome do usuário e membros que contribuem com a renda -->
-        <section class="transaction-form" id="settingsSection">
-            <h2>Configurações</h2>
+            <section class="summary" id="summarySection" data-intro="Aqui você vê seu saldo, receitas, despesas e quanto foi contribuído no total." data-step="2">
+                <div class="card">
+                    <h3>Saldo atual</h3>
+                    <p id="balance">R$ 0,00</p>
+                </div>
+                <div class="card">
+                    <h3>Receitas</h3>
+                    <p id="totalIncome">R$ 0,00</p>
+                </div>
+                <div class="card">
+                    <h3>Despesas</h3>
+                    <p id="totalExpense">R$ 0,00</p>
+                </div>
+                <div class="card">
+                    <h3>Renda bruta (soma dos membros)</h3>
+                    <p id="grossIncome">R$ 0,00</p>
+                </div>
+            </section>
 
-            <div class="settings-block">
-                <label for="userName">Seu nome</label>
-                <input type="text" id="userName" placeholder="Ex: Maria">
-            </div>
+            <!-- Gráficos -->
+            <section class="charts" id="chartsSection" data-intro="Os gráficos mostram seus gastos por categoria e por mês, atualizados automaticamente." data-step="3">
+                <div class="chart-card">
+                    <h3>Gastos por categoria</h3>
+                    <canvas id="chartCategorias"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>Gastos por mês</h3>
+                    <canvas id="chartMensal"></canvas>
+                </div>
+            </section>
 
-            <div class="settings-block">
-                <label>Quem contribui com a renda</label>
-                <p class="settings-hint">Se você usa sozinho(a), cadastre só o seu nome com o valor que você contribui.</p>
+            <!-- Comparação: quanto entrou (membros) x quanto foi gasto -->
+            <section id="divisionStatus" class="division-status">
+                <p id="divisionText">Cadastre os membros em Configurações pra ver se o dinheiro fechou.</p>
+            </section>
 
-                <div id="membersList"></div>
+            <section class="transactions" id="transactionsSection" data-intro="Aqui aparecem suas últimas transações. Clique em '+ Adicionar transação' pra cadastrar uma nova." data-step="1">
+                <div class="section-header">
+                    <h2>Últimas transações</h2>
+                    <button id="addTransaction">+ Adicionar transação</button>
+                </div>
+                <div id="transactionList">
+                    <p>Nenhuma transação cadastrada.</p>
+                </div>
+            </section>
 
-                <button type="button" id="addMemberBtn" class="secondary-button">+ Adicionar membro</button>
-            </div>
+        </main>
 
-            <div class="form-buttons">
-                <button type="button" id="saveSettingsBtn">Salvar configurações</button>
-                <button type="button" id="cancelSettingsBtn">Cancelar</button>
-            </div>
-        </section>
-
-        <section class="summary" id="summarySection" data-intro="Aqui você vê seu saldo, receitas, despesas e quanto foi contribuído no total." data-step="2">
-            <div class="card">
-                <h3>Saldo atual</h3>
-                <p id="balance">R$ 0,00</p>
-            </div>
-            <div class="card">
-                <h3>Receitas</h3>
-                <p id="totalIncome">R$ 0,00</p>
-            </div>
-            <div class="card">
-                <h3>Despesas</h3>
-                <p id="totalExpense">R$ 0,00</p>
-            </div>
-            <div class="card">
-                <h3>Renda bruta (soma dos membros)</h3>
-                <p id="grossIncome">R$ 0,00</p>
-            </div>
-        </section>
-
-        <!-- Gráficos -->
-        <section class="charts" id="chartsSection" data-intro="Os gráficos mostram seus gastos por categoria e por mês, atualizados automaticamente." data-step="3">
-            <div class="chart-card">
-                <h3>Gastos por categoria</h3>
-                <canvas id="chartCategorias"></canvas>
-            </div>
-            <div class="chart-card">
-                <h3>Gastos por mês</h3>
-                <canvas id="chartMensal"></canvas>
-            </div>
-        </section>
-
-        <!-- Comparação: quanto entrou (membros) x quanto foi gasto -->
-        <section id="divisionStatus" class="division-status">
-            <p id="divisionText">Cadastre os membros em Configurações pra ver se o dinheiro fechou.</p>
-        </section>
-
-        <section class="transactions" id="transactionsSection" data-intro="Aqui aparecem suas últimas transações. Clique em '+ Adicionar transação' pra cadastrar uma nova." data-step="1">
-            <div class="section-header">
-                <h2>Últimas transações</h2>
-                <button id="addTransaction">+ Adicionar transação</button>
-            </div>
-            <div id="transactionList">
-                <p>Nenhuma transação cadastrada.</p>
-            </div>
-        </section>
-
-    </main>
+    </div>
 
     <!-- Botão flutuante que abre o chat -->
     <button id="chatToggle" class="chat-toggle" data-intro="Esse é o Assistente LifeGast: clique aqui pra tirar dúvidas rápidas sobre seus gastos." data-step="4">💬 Assistente LifeGast</button>

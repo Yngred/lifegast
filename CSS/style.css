@@ -5,63 +5,98 @@
 }
 
 body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f5f6fa;
-    color: #222;
-    padding-bottom: 40px;
+    font-family: 'Inter', Arial, sans-serif;
+    background: #F7F5F0;
+    color: #1B1F1D;
 }
 
-header {
-    background: #2f80ed;
-    color: white;
-    padding: 20px 30px;
+h1, h2, h3 {
+    font-family: 'Fraunces', serif;
+}
+
+/* ===== Layout geral: sidebar + conteúdo ===== */
+
+.app-shell {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+    min-height: 100vh;
 }
 
-header h1 {
+.sidebar {
+    width: 220px;
+    background: #1F5E4C;
+    color: #F7F5F0;
+    padding: 28px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.sidebar-logo {
+    font-family: 'Fraunces', serif;
     font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 40px;
 }
 
-nav a {
-    color: white;
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sidebar-nav a {
+    color: #D7E5DE;
     text-decoration: none;
-    margin-left: 20px;
     font-size: 14px;
+    font-weight: 500;
+    padding: 10px 12px;
+    border-radius: 8px;
+}
+
+.sidebar-nav a:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+.sidebar-nav a.active {
+    background: #D9A441;
+    color: #1B1F1D;
     font-weight: 600;
 }
 
-nav a:hover {
-    text-decoration: underline;
+.content {
+    margin-left: 220px;
+    flex: 1;
+    padding: 36px 48px;
 }
 
-main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 24px 20px;
-}
+/* ===== Boas-vindas ===== */
 
 .welcome {
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 }
 
 .welcome h2 {
-    font-size: 22px;
+    font-size: 28px;
+    font-weight: 600;
     margin-bottom: 4px;
 }
 
 .welcome p {
-    color: #666;
+    color: #5C645F;
     font-size: 14px;
-    margin-bottom: 10px;
+    margin-bottom: 14px;
+}
+
+.welcome-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .simulate-button {
-    margin-top: 10px;
-    background: #f2994a;
-    color: white;
+    background: #D9A441;
+    color: #1B1F1D;
     border: none;
     padding: 10px 16px;
     border-radius: 8px;
@@ -71,11 +106,9 @@ main {
 }
 
 .tutorial-button {
-    margin-top: 10px;
-    margin-left: 8px;
-    background: #eef4ff;
-    color: #2f80ed;
-    border: 1px solid #cfe0ff;
+    background: white;
+    color: #1F5E4C;
+    border: 1px solid #C9D8D1;
     padding: 10px 16px;
     border-radius: 8px;
     font-size: 13px;
@@ -87,16 +120,17 @@ main {
 
 .transaction-form {
     background: white;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 10px rgba(31,94,76,0.08);
     display: none;
+    max-width: 420px;
 }
 
 .transaction-form h2 {
-    font-size: 18px;
-    margin-bottom: 16px;
+    font-size: 19px;
+    margin-bottom: 18px;
 }
 
 .transaction-form form > div,
@@ -116,9 +150,10 @@ main {
 .transaction-form select {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #DDE3DF;
     border-radius: 8px;
     font-size: 14px;
+    font-family: inherit;
 }
 
 .settings-hint {
@@ -136,7 +171,7 @@ main {
 .member-row input {
     flex: 1;
     padding: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid #DDE3DF;
     border-radius: 8px;
 }
 
@@ -150,7 +185,7 @@ main {
 .form-buttons {
     display: flex;
     gap: 10px;
-    margin-top: 16px;
+    margin-top: 18px;
 }
 
 button {
@@ -159,7 +194,7 @@ button {
 
 .transaction-form button[type="submit"],
 #saveSettingsBtn {
-    background: #2f80ed;
+    background: #1F5E4C;
     color: white;
     border: none;
     padding: 10px 18px;
@@ -172,7 +207,7 @@ button {
 .transaction-form button[type="button"]:not(.secondary-button),
 #cancelSettingsBtn,
 #cancelTransaction {
-    background: #eee;
+    background: #EFEFEA;
     color: #333;
     border: none;
     padding: 10px 18px;
@@ -182,9 +217,9 @@ button {
 }
 
 .secondary-button {
-    background: #eef4ff;
-    color: #2f80ed;
-    border: 1px solid #cfe0ff;
+    background: #EAF2EE;
+    color: #1F5E4C;
+    border: 1px solid #C9D8D1;
     padding: 8px 14px;
     border-radius: 8px;
     font-size: 13px;
@@ -195,98 +230,106 @@ button {
 
 .summary {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 14px;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
 }
 
 .card {
     background: white;
-    border-radius: 12px;
-    padding: 18px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 2px 10px rgba(31,94,76,0.06);
 }
 
 .card h3 {
+    font-family: 'Inter', sans-serif;
     font-size: 13px;
     color: #888;
     font-weight: 600;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
 }
 
 .card p {
-    font-size: 20px;
+    font-size: 28px;
     font-weight: 700;
+    color: #1F5E4C;
+    font-variant-numeric: tabular-nums;
 }
 
 /* ===== Gráficos ===== */
 
 .charts {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 14px;
-    margin-bottom: 20px;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 16px;
+    margin-bottom: 24px;
 }
 
 .chart-card {
     background: white;
-    border-radius: 12px;
-    padding: 18px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(31,94,76,0.06);
 }
 
 .chart-card h3 {
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     color: #444;
+}
+
+.chart-card canvas {
+    max-height: 220px;
 }
 
 /* ===== Divisão (renda x gasto) ===== */
 
 .division-status {
     background: white;
-    border-radius: 12px;
-    padding: 16px 18px;
-    margin-bottom: 20px;
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 24px;
     font-size: 14px;
-    border-left: 4px solid #ccc;
+    border-left: 4px solid #C9D8D1;
 }
 
 .division-status.positive {
-    border-left-color: #27ae60;
-    background: #f2fbf5;
+    border-left-color: #1F5E4C;
+    background: #F0F7F3;
 }
 
 .division-status.negative {
-    border-left-color: #eb5757;
-    background: #fdf2f2;
+    border-left-color: #C1666B;
+    background: #FBF1F1;
 }
 
 /* ===== Lista de transações ===== */
 
 .transactions {
     background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 2px 10px rgba(31,94,76,0.06);
 }
 
 .section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
 }
 
 .section-header h2 {
-    font-size: 18px;
+    font-size: 19px;
 }
 
 .section-header button {
-    background: #2f80ed;
+    background: #1F5E4C;
     color: white;
     border: none;
-    padding: 8px 14px;
+    padding: 9px 16px;
     border-radius: 8px;
     font-size: 13px;
     font-weight: 600;
@@ -298,7 +341,7 @@ button {
     justify-content: space-between;
     align-items: center;
     padding: 12px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #EFEFEA;
     font-size: 14px;
 }
 
@@ -319,7 +362,7 @@ button {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: #2f80ed;
+    background: #1F5E4C;
     color: white;
     border: none;
     padding: 14px 20px;
@@ -352,7 +395,7 @@ button {
 }
 
 .chat-header {
-    background: #2f80ed;
+    background: #1F5E4C;
     color: white;
     padding: 14px 16px;
     display: flex;
@@ -388,13 +431,13 @@ button {
 }
 
 .chat-bubble.bot {
-    background: #f1f1f1;
+    background: #F1F1EA;
     align-self: flex-start;
     border-bottom-left-radius: 4px;
 }
 
 .chat-bubble.user {
-    background: #2f80ed;
+    background: #1F5E4C;
     color: white;
     align-self: flex-end;
     border-bottom-right-radius: 4px;
@@ -405,13 +448,13 @@ button {
     flex-wrap: wrap;
     gap: 6px;
     padding: 10px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #EFEFEA;
 }
 
 .chat-quick-replies button {
-    background: #eef4ff;
-    color: #2f80ed;
-    border: 1px solid #cfe0ff;
+    background: #EAF2EE;
+    color: #1F5E4C;
+    border: 1px solid #C9D8D1;
     border-radius: 14px;
     padding: 6px 10px;
     font-size: 12px;
@@ -419,6 +462,35 @@ button {
 }
 
 .chat-quick-replies button:hover {
-    background: #2f80ed;
+    background: #1F5E4C;
     color: white;
+}
+
+/* ===== Responsivo ===== */
+
+@media (max-width: 800px) {
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 16px 20px;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 24px 20px;
+    }
+
+    .summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .charts {
+        grid-template-columns: 1fr;
+    }
 }
